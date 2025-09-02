@@ -1,0 +1,201 @@
+import sys
+
+from PyQt5.QtWidgets import (QLabel, QLineEdit, QVBoxLayout, QApplication, QWidget, QPushButton, QHBoxLayout)
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
+
+from animal_dictionary import get_animals, animals
+import random
+import time
+import pygame
+
+class Hangman(QWidget):
+    choice = random.choice(get_animals())
+    print(choice)
+    dash = [" _ "] * len(choice)
+
+    correct = "correct.mp3"
+    wrong = "wrong.mp3"
+    win = "win.mp3"
+    lose = "lose.mp3"
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("HangMan")
+        self.wrong_guesses = 0
+        self.guess = QLabel(f"Guesses: {self.wrong_guesses}", self)
+        self.picture = QLabel(self)
+        self.man1 = QPixmap("Hang Man Art 2.png")
+        self.man2 = QPixmap("Hang Man Art.png")
+        self.man3 = QPixmap("3.png")
+        self.man4 = QPixmap("4.png")
+        self.man5 = QPixmap("5.png")
+        self.man6 = QPixmap("6.png")
+        self.man7 = QPixmap("7.png")
+
+        self.picture.setPixmap(self.man1)
+        self.picture.setScaledContents(True)
+
+        self.emoji = QLabel(self)
+        self.word = QLabel("".join(self.dash), self)
+        self.line_edit = QLineEdit(self)
+        self.button = QPushButton("CLICK", self)
+        self.message = QLabel("",self)
+
+        self.initUI()
+
+    def initUI(self):
+        hbox = QHBoxLayout()
+        hbox.addWidget(self.line_edit)
+        hbox.addWidget(self.button)
+
+        vbox = QVBoxLayout()
+        vbox.addWidget(self.guess)
+        vbox.addWidget(self.picture)
+        vbox.addWidget(self.emoji)
+        vbox.addWidget(self.word)
+        vbox.addLayout(hbox)
+        vbox.addWidget(self.message)
+
+        self.guess.setAlignment(Qt.AlignRight)
+        self.picture.setAlignment(Qt.AlignCenter)
+        self.emoji.setAlignment(Qt.AlignCenter)
+        self.word.setAlignment(Qt.AlignCenter)
+        self.message.setAlignment(Qt.AlignCenter)
+
+        self.setLayout(vbox)
+
+
+
+        self.guess.setObjectName("guess")
+        self.emoji.setObjectName("emoji")
+        self.word.setObjectName("word")
+        self.message.setObjectName("message")
+        self.button.setObjectName("button")
+
+        self.line_edit.setPlaceholderText("Guess the letter")
+
+        self.setStyleSheet("""
+        QWidget{
+            background-color: hsl(41, 86%, 71%);
+        }
+        QPushButton#button, QLineEdit{
+            background-color: hsl(41, 86%, 71%);
+            font-size: 30px;
+            padding: 10px;
+            border: 4px solid;
+            border-radius: 30px;
+        }
+        QLabel#word{
+            font-size: 30px;
+            font-weight: bold;
+            font-style: italic;
+            margin: 25px;
+        }
+        QLabel#guess{
+            color: red;
+            font-size: 30px;
+            font-family: Arial;
+            font-weight: bold;
+        }
+        QLabel#emoji{
+            font-size: 80px;
+        }
+        QLabel#message{
+            font-size: 30px;
+            font-family: calibri;
+            font-weight: bold;
+            font-style: italic;
+        }
+        QPushButton#button:hover{
+            background-color: hsl(41, 86%, 91%);
+        }
+        QLineEdit:hover{
+            background-color: hsl(41, 86%, 91%);    
+        """)
+
+        self.button.clicked.connect(self.check_letter)
+        self.button.clicked.connect(self.grow_body)
+        self.button.clicked.connect(self.check_result)
+
+    def check_letter(self):
+        if 1 < len(self.line_edit.text()) > 1:
+            self.message.setText("Your choice must contain ONE letter")
+            time.sleep(4)
+            self.message.clear()
+            self.line_edit.clear()
+
+        else:
+            pygame.mixer.init()
+            pygame.mixer.music.load(self.correct)
+            pygame.mixer.music.play()
+            for i in range(len(self.choice)):
+                 if self.choice[i] == self.line_edit.text().upper():
+                    self.dash[i] = self.line_edit.text().upper()
+                    self.word.setText("".join(self.dash))
+
+
+
+    def grow_body(self):
+        if not self.line_edit.text().upper() in self.choice:
+            pygame.mixer.init()
+            pygame.mixer.music.load(self.wrong)
+            pygame.mixer.music.play()
+            self.line_edit.clear()
+            self.wrong_guesses += 1
+            self.guess.setText(f"Guesses: {str(self.wrong_guesses)}")
+            match self.wrong_guesses:
+                case 1:
+                    self.picture.setPixmap(self.man2)
+                    self.picture.setScaledContents(True)
+                case 2:
+                    self.picture.setPixmap(self.man3)
+                    self.picture.setScaledContents(True)
+                case 3:
+                    self.picture.setPixmap(self.man4)
+                    self.picture.setScaledContents(True)
+                case 4:
+                    self.picture.setPixmap(self.man5)
+                    self.picture.setScaledContents(True)
+                case 5:
+                    self.picture.setPixmap(self.man6)
+                    self.picture.setScaledContents(True)
+                case 6:
+                    self.picture.setPixmap(self.man7)
+                    self.picture.setScaledContents(True)
+
+
+    def check_result(self):
+        if self.wrong_guesses == 6:
+            pygame.mixer.init()
+            pygame.mixer.music.load(self.lose)
+            pygame.mixer.music.play()
+
+            while pygame.mixer.music.get_busy():
+                time.sleep(1)
+
+            self.emoji.setText(animals.get(self.choice))
+            self.button.setDisabled(True)
+            self.line_edit.setDisabled(True)
+            self.message.setText(f"GAME OVER!!\nThe Animal was a {self.choice}")
+
+        elif self.word.text() == self.choice:
+             pygame.mixer.init()
+             pygame.mixer.music.load(self.win)
+             pygame.mixer.music.play()
+
+             while pygame.mixer.music.get_busy():
+                 time.sleep(1)
+
+             self.emoji.setText(animals.get(self.choice))
+             self.button.setDisabled(True)
+             self.line_edit.setDisabled(True)
+             self.message.setText("YOU WIN!!")
+
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    hangman = Hangman()
+    hangman.show()
+    sys.exit(app.exec_())
