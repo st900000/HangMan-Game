@@ -193,7 +193,6 @@ class Hangman(QWidget):
              self.message.setText("YOU WIN!!")
 
 
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     hangman = Hangman()
