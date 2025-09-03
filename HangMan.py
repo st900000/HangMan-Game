@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import (QLabel, QLineEdit, QVBoxLayout, QApplication, QWidget, QPushButton, QHBoxLayout)
+from PyQt5.QtWidgets import QLabel, QLineEdit, QVBoxLayout, QApplication, QWidget
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
@@ -109,6 +109,12 @@ class Hangman(QWidget):
         time.sleep(0.5)
         self.line_edit.returnPressed.connect(self.clear_text)
 
+    @staticmethod
+    def play_sound(sound_file):
+        pygame.mixer.init()
+        pygame.mixer.music.load(sound_file)
+        pygame.mixer.music.play()
+
     def check_letter(self):
         if 0 > len(self.line_edit.text()) or len(self.line_edit.text()) > 1:
             self.message.setText("Your choice must contain atleast ONE letter")
@@ -117,9 +123,7 @@ class Hangman(QWidget):
             self.line_edit.clear()
 
         else:
-            pygame.mixer.init()
-            pygame.mixer.music.load(self.correct)
-            pygame.mixer.music.play()
+            self.play_sound(self.correct)
             for i in range(len(self.choice)):
                  if self.choice[i] == self.line_edit.text().upper():
                     self.dash[i] = self.line_edit.text().upper()
@@ -128,9 +132,7 @@ class Hangman(QWidget):
 
     def check_result(self):
         if not self.line_edit.text().upper() in self.choice:
-            pygame.mixer.init()
-            pygame.mixer.music.load(self.wrong)
-            pygame.mixer.music.play()
+            self.play_sound(self.wrong)
             self.line_edit.clear()
             self.wrong_guesses += 1
             self.guess.setText(f"Guesses: {str(self.wrong_guesses)}")
@@ -155,9 +157,7 @@ class Hangman(QWidget):
                     self.picture.setScaledContents(True)
 
         if self.wrong_guesses == 6:
-            pygame.mixer.init()
-            pygame.mixer.music.load(self.lose)
-            pygame.mixer.music.play()
+            self.play_sound(self.lose)
 
             while pygame.mixer.music.get_busy():
                 time.sleep(1)
@@ -167,9 +167,7 @@ class Hangman(QWidget):
             self.message.setText(f"GAME OVER!!\nThe Animal was a {self.choice}")
 
         if self.word.text() == self.choice:
-             pygame.mixer.init()
-             pygame.mixer.music.load(self.win)
-             pygame.mixer.music.play()
+             self.play_sound(self.win)
 
              while pygame.mixer.music.get_busy():
                  time.sleep(1)
