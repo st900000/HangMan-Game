@@ -115,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756914039680</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fix: Removed 'click' button and its functions&#10;&#10;Used returnPressed attribute of lineEdit widget as signal instead&#10;&#10;3/9/2025&#10;&#10;Moved grow_body function to check result&#10;&#10;Text clears from line_edit after every signal sent&#10;&#10;Updated and improved sound files&#10;&#10;Rearranged file arrangement">
+      <option name="closed" value="true" />
+      <created>1756914257385</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1756914257385</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
