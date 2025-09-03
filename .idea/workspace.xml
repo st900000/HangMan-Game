@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="defdd54b-eecc-40df-ae46-4b515b02042d" name="Changes" comment="Fix: Removed 'click' button and its functions&#10;&#10;Used returnPressed attribute of lineEdit widget as signal instead">
-      <change afterPath="$PROJECT_DIR$/sound_files/correct_answer.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sound_files/lose_game.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sound_files/win_game.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sound_files/wrong_answer.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/hgArt/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/hgArt/4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/hgArt/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/hgArt/6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/hgArt/7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hang Man Art 2.png" beforeDir="false" afterPath="$PROJECT_DIR$/hgArt/Hang Man Art 2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hang Man Art.png" beforeDir="false" afterPath="$PROJECT_DIR$/hgArt/Hang Man Art.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HangMan.py" beforeDir="false" afterPath="$PROJECT_DIR$/HangMan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/correct.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/win.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrong.mp3" beforeDir="false" />
-    </list>
+    <list default="true" id="defdd54b-eecc-40df-ae46-4b515b02042d" name="Changes" comment="Fix: Removed 'click' button and its functions&#10;&#10;Used returnPressed attribute of lineEdit widget as signal instead&#10;&#10;3/9/2025&#10;&#10;Moved grow_body function to check result&#10;&#10;Text clears from line_edit after every signal sent&#10;&#10;Updated and improved sound files&#10;&#10;Rearranged file arrangement" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +107,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756900445010</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix: Removed 'click' button and its functions&#10;&#10;Used returnPressed attribute of lineEdit widget as signal instead&#10;&#10;3/9/2025&#10;&#10;Moved grow_body function to check result&#10;&#10;Text clears from line_edit after every signal sent&#10;&#10;Updated and improved sound files&#10;&#10;Rearranged file arrangement">
+      <option name="closed" value="true" />
+      <created>1756914039680</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1756914039680</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,6 +133,7 @@
     <MESSAGE value="Version 1" />
     <MESSAGE value="space correction" />
     <MESSAGE value="Fix: Removed 'click' button and its functions&#10;&#10;Used returnPressed attribute of lineEdit widget as signal instead" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: Removed 'click' button and its functions&#10;&#10;Used returnPressed attribute of lineEdit widget as signal instead" />
+    <MESSAGE value="Fix: Removed 'click' button and its functions&#10;&#10;Used returnPressed attribute of lineEdit widget as signal instead&#10;&#10;3/9/2025&#10;&#10;Moved grow_body function to check result&#10;&#10;Text clears from line_edit after every signal sent&#10;&#10;Updated and improved sound files&#10;&#10;Rearranged file arrangement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: Removed 'click' button and its functions&#10;&#10;Used returnPressed attribute of lineEdit widget as signal instead&#10;&#10;3/9/2025&#10;&#10;Moved grow_body function to check result&#10;&#10;Text clears from line_edit after every signal sent&#10;&#10;Updated and improved sound files&#10;&#10;Rearranged file arrangement" />
   </component>
 </project>
