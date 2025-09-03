@@ -14,10 +14,10 @@ class Hangman(QWidget):
     print(choice)
     dash = [" _ "] * len(choice)
 
-    correct = "correct.mp3"
-    wrong = "wrong.mp3"
-    win = "win.mp3"
-    lose = "lose.mp3"
+    correct = "sound_files/correct_answer.mp3"
+    wrong = "sound_files/wrong_answer.mp3"
+    win = "sound_files/win_game.mp3"
+    lose = "sound_files/lose_game.mp3"
 
     def __init__(self):
         super().__init__()
@@ -25,13 +25,13 @@ class Hangman(QWidget):
         self.wrong_guesses = 0
         self.guess = QLabel(f"Guesses: {self.wrong_guesses}", self)
         self.picture = QLabel(self)
-        self.man1 = QPixmap("Hang Man Art 2.png")
-        self.man2 = QPixmap("Hang Man Art.png")
-        self.man3 = QPixmap("3.png")
-        self.man4 = QPixmap("4.png")
-        self.man5 = QPixmap("5.png")
-        self.man6 = QPixmap("6.png")
-        self.man7 = QPixmap("7.png")
+        self.man1 = QPixmap("hgArt/Hang Man Art 2.png")
+        self.man2 = QPixmap("hgArt/Hang Man Art.png")
+        self.man3 = QPixmap("hgArt/3.png")
+        self.man4 = QPixmap("hgArt/4.png")
+        self.man5 = QPixmap("hgArt/5.png")
+        self.man6 = QPixmap("hgArt/6.png")
+        self.man7 = QPixmap("hgArt/7.png")
 
         self.picture.setPixmap(self.man1)
         self.picture.setScaledContents(True)
@@ -44,6 +44,7 @@ class Hangman(QWidget):
         self.initUI()
 
     def initUI(self):
+
         vbox = QVBoxLayout()
         vbox.addWidget(self.guess)
         vbox.addWidget(self.picture)
@@ -100,19 +101,17 @@ class Hangman(QWidget):
             font-family: calibri;
             font-weight: bold;
             font-style: italic;
-        }
-        QLineEdit:hover{
-            background-color: hsl(41, 86%, 91%);    
+        }    
         """)
 
-
         self.line_edit.returnPressed.connect(self.check_letter)
-        self.line_edit.returnPressed.connect(self.grow_body)
         self.line_edit.returnPressed.connect(self.check_result)
+        time.sleep(0.5)
+        self.line_edit.returnPressed.connect(self.clear_text)
 
     def check_letter(self):
-        if 1 < len(self.line_edit.text()) > 1:
-            self.message.setText("Your choice must contain ONE letter")
+        if 0 > len(self.line_edit.text()) or len(self.line_edit.text()) > 1:
+            self.message.setText("Your choice must contain atleast ONE letter")
             time.sleep(4)
             self.message.clear()
             self.line_edit.clear()
@@ -127,8 +126,7 @@ class Hangman(QWidget):
                     self.word.setText("".join(self.dash))
 
 
-
-    def grow_body(self):
+    def check_result(self):
         if not self.line_edit.text().upper() in self.choice:
             pygame.mixer.init()
             pygame.mixer.music.load(self.wrong)
@@ -156,8 +154,6 @@ class Hangman(QWidget):
                     self.picture.setPixmap(self.man7)
                     self.picture.setScaledContents(True)
 
-
-    def check_result(self):
         if self.wrong_guesses == 6:
             pygame.mixer.init()
             pygame.mixer.music.load(self.lose)
@@ -167,11 +163,10 @@ class Hangman(QWidget):
                 time.sleep(1)
 
             self.emoji.setText(animals.get(self.choice))
-            self.button.setDisabled(True)
             self.line_edit.setDisabled(True)
             self.message.setText(f"GAME OVER!!\nThe Animal was a {self.choice}")
 
-        elif self.word.text() == self.choice:
+        if self.word.text() == self.choice:
              pygame.mixer.init()
              pygame.mixer.music.load(self.win)
              pygame.mixer.music.play()
@@ -180,9 +175,11 @@ class Hangman(QWidget):
                  time.sleep(1)
 
              self.emoji.setText(animals.get(self.choice))
-             self.button.setDisabled(True)
              self.line_edit.setDisabled(True)
              self.message.setText("YOU WIN!!")
+
+    def clear_text(self):
+        self.line_edit.clear()
 
 
 if __name__ == '__main__':
