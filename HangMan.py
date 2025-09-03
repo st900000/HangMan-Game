@@ -39,22 +39,17 @@ class Hangman(QWidget):
         self.emoji = QLabel(self)
         self.word = QLabel("".join(self.dash), self)
         self.line_edit = QLineEdit(self)
-        self.button = QPushButton("CLICK", self)
         self.message = QLabel("",self)
 
         self.initUI()
 
     def initUI(self):
-        hbox = QHBoxLayout()
-        hbox.addWidget(self.line_edit)
-        hbox.addWidget(self.button)
-
         vbox = QVBoxLayout()
         vbox.addWidget(self.guess)
         vbox.addWidget(self.picture)
         vbox.addWidget(self.emoji)
         vbox.addWidget(self.word)
-        vbox.addLayout(hbox)
+        vbox.addWidget(self.line_edit)
         vbox.addWidget(self.message)
 
         self.guess.setAlignment(Qt.AlignRight)
@@ -71,7 +66,6 @@ class Hangman(QWidget):
         self.emoji.setObjectName("emoji")
         self.word.setObjectName("word")
         self.message.setObjectName("message")
-        self.button.setObjectName("button")
 
         self.line_edit.setPlaceholderText("Guess the letter")
 
@@ -79,7 +73,7 @@ class Hangman(QWidget):
         QWidget{
             background-color: hsl(41, 86%, 71%);
         }
-        QPushButton#button, QLineEdit{
+        QLineEdit{
             background-color: hsl(41, 86%, 71%);
             font-size: 30px;
             padding: 10px;
@@ -107,16 +101,14 @@ class Hangman(QWidget):
             font-weight: bold;
             font-style: italic;
         }
-        QPushButton#button:hover{
-            background-color: hsl(41, 86%, 91%);
-        }
         QLineEdit:hover{
             background-color: hsl(41, 86%, 91%);    
         """)
 
-        self.button.clicked.connect(self.check_letter)
-        self.button.clicked.connect(self.grow_body)
-        self.button.clicked.connect(self.check_result)
+
+        self.line_edit.returnPressed.connect(self.check_letter)
+        self.line_edit.returnPressed.connect(self.grow_body)
+        self.line_edit.returnPressed.connect(self.check_result)
 
     def check_letter(self):
         if 1 < len(self.line_edit.text()) > 1:
