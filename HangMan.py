@@ -11,7 +11,6 @@ import pygame
 
 class Hangman(QWidget):
     choice = random.choice(get_animals())
-    print(choice)
     dash = [" _ "] * len(choice)
 
     correct = "sound_files/correct_answer.mp3"
@@ -41,6 +40,8 @@ class Hangman(QWidget):
         self.line_edit = QLineEdit(self)
         self.message = QLabel("",self)
 
+        pygame.mixer.init()
+
         self.initUI()
 
     def initUI(self):
@@ -61,8 +62,6 @@ class Hangman(QWidget):
 
         self.setLayout(vbox)
 
-
-
         self.guess.setObjectName("guess")
         self.emoji.setObjectName("emoji")
         self.word.setObjectName("word")
@@ -72,10 +71,9 @@ class Hangman(QWidget):
 
         self.setStyleSheet("""
         QWidget{
-            background-color: hsl(41, 86%, 71%);
+            background-color: white;
         }
         QLineEdit{
-            background-color: hsl(41, 86%, 71%);
             font-size: 30px;
             padding: 10px;
             border: 4px solid;
@@ -111,12 +109,12 @@ class Hangman(QWidget):
 
     @staticmethod
     def play_sound(sound_file):
-        pygame.mixer.init()
+
         pygame.mixer.music.load(sound_file)
         pygame.mixer.music.play()
 
     def check_letter(self):
-        if 0 > len(self.line_edit.text()) or len(self.line_edit.text()) > 1:
+        if len(self.line_edit.text()) != 1:
             self.message.setText("Your choice must contain atleast ONE letter")
             time.sleep(4)
             self.message.clear()

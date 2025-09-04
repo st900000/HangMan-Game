@@ -34,7 +34,6 @@ animals = {
 
             "DEER": "🦌",
             "PANDA": "🐼",
-            "WOLVERINE": "",
             "LADYBUG": "🐞",
             "PARROT": "🦜",
             "WOODPECKER": "🐦",
@@ -73,7 +72,6 @@ animals = {
             "SCORPION": "🦂",
 
             "BEAR": "🐻",
-            "MOOSE": "",
             "EAGLE": "🦅",
             "FLAMINGO": "🦩",
             "FROG": "🐸",
