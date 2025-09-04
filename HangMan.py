@@ -155,24 +155,28 @@ class Hangman(QWidget):
                     self.picture.setScaledContents(True)
 
         if self.wrong_guesses == 6:
-            self.play_sound(self.lose)
-
-            while pygame.mixer.music.get_busy():
-                time.sleep(1)
-
             self.emoji.setText(animals.get(self.choice))
             self.line_edit.setDisabled(True)
             self.message.setText(f"GAME OVER!!\nThe Animal was a {self.choice}")
 
+            self.play_sound(self.lose)
+
+            while pygame.mixer.music.get_busy():
+                time.sleep(0.3)
+
+
+
         if self.word.text() == self.choice:
-             self.play_sound(self.win)
-
-             while pygame.mixer.music.get_busy():
-                 time.sleep(1)
-
              self.emoji.setText(animals.get(self.choice))
              self.line_edit.setDisabled(True)
              self.message.setText("YOU WIN!!")
+
+             self.play_sound(self.win)
+
+             while pygame.mixer.music.get_busy():
+                 time.sleep(0.3)
+
+
 
     def clear_text(self):
         self.line_edit.clear()
